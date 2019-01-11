@@ -1,0 +1,20 @@
+[Initial]
+Message=Deinstalliere Brackets
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "Brackets"
+WinBatch_Setup
+Sub_HandleExitCode
+
+[WinBatch_Setup]
+msiexec /passive /x "%ScriptPath%\data\install.msi"
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

@@ -1,0 +1,10 @@
+[Product]
+type: localboot
+id: brackets
+name: Brackets
+description: Brackets - Ein moderner, quelloffener Code-Editor, der Webdesign versteht.
+advice:
+version: 1.2
+packageVersion: 1.2
+setupScript: install.ins
+uninstallScript: remove.ins
