@@ -1,0 +1,20 @@
+[Initial]
+Message=Deinstalliere Template
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "Template"
+WinBatch_Setup
+Sub_HandleExitCode
+
+[WinBatch_Setup]
+del "%ProgramData%\Microsoft\Windows\Start Menu\Programs\StartUp\start_explorer.ps1"
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif
