@@ -1,14 +1,15 @@
 [Initial]
-Message=Deinstalliere Template
+Message=Deinstalliere Explorer-Fix
 DefVar $ExitCode$
 
 [Aktionen]
-ShowBitmap "%ScriptPath%\logo.png" "Template"
-WinBatch_Setup
+ShowBitmap "%ScriptPath%\logo.png" "Explorer-Fix"
+Files_Setup
 Sub_HandleExitCode
 
-[WinBatch_Setup]
-del "%ProgramData%\Microsoft\Windows\Start Menu\Programs\StartUp\start_explorer.ps1"
+[Files_Setup]
+delete "%CommonStartupDir%\start_explorer.cmd"
+delete "%CommonStartupDir%\Powershell" -f
 
 [Sub_HandleExitCode]
 ; check return code

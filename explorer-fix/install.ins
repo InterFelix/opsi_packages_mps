@@ -3,12 +3,12 @@ Message=Installiere Explorer-Fix
 DefVar $ExitCode$
 
 [Aktionen]
-ShowBitmap "%ScriptPath%\logo.png" "Template"
-WinBatch_Setup
+ShowBitmap "%ScriptPath%\logo.png" "Explorer-Fix"
+Files_Setup
 Sub_HandleExitCode
 
-[WinBatch_Setup]
-copy "%ScriptPath%\data\start_explorer.ps1" "%ProgramData%\Microsoft\Windows\Start Menu\Programs\StartUp\start_explorer.ps1"
+[Files_Setup]
+copy -s "%ScriptPath%\data\*" "%CommonStartupDir%"
 
 [Sub_HandleExitCode]
 ; check return code

@@ -5,6 +5,6 @@ name: Explorer-Fix
 description: Fixed das Problem, dass explorer.exe bim Anmelden nicht startet
 advice:
 version: 1.0
-packageVersion: 1.0
+packageVersion: 1.3
 setupScript: install.ins
 uninstallScript: remove.ins
