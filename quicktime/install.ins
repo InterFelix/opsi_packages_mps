@@ -1,0 +1,22 @@
+[Initial]
+Message=Installiere QuickTime
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "QuickTime"
+WinBatch_Setup
+Sub_HandleExitCode
+
+[WinBatch_Setup]
+msiexec /passive /i "%ScriptPath%\data\QuickTime.msi" DESKTOP_SHORTCUTS=NO SCHEDULE_ASUW=0 ASUWINSTALLED=0
+msiexec /passive /i "%ScriptPath%\data\AppleSoftwareUpdate.msi" SCHEDULE_ASUW=0 ASUWINSTALLED=0
+msiexec /passive /i "%ScriptPath%\data\AppleApplicationSupport.msi" SCHEDULE_ASUW=0 ASUWINSTALLED=0
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

@@ -1,0 +1,10 @@
+[Product]
+type: localboot
+id: quicktime
+name: QuickTime Player
+description: Installiert QuickTime 7
+advice:
+version: 7.7.9
+packageVersion: 1.0
+setupScript: install.ins
+uninstallScript: remove.ins

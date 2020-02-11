@@ -1,0 +1,22 @@
+[Initial]
+Message=Deinstalliere QuickTime
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "QuickTime"
+WinBatch_Setup
+Sub_HandleExitCode
+
+[WinBatch_Setup]
+msiexec /passive /x "%ScriptPath%\data\QuickTime.msi"
+msiexec /passive /x "%ScriptPath%\data\AppleSoftwareUpdate.msi"
+msiexec /passive /x "%ScriptPath%\data\AppleApplicationSupport.msi"
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif
