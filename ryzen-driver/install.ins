@@ -1,0 +1,21 @@
+[Initial]
+Message=Installiere die Ryzen Treiber
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "Ryzen Treiber"
+WinBatch_Setup
+Sub_HandleExitCode
+ExitWindows /Reboot
+
+[WinBatch_Setup]
+"%ScriptPath%\data\radeon.exe" -INSTALL
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

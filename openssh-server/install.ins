@@ -1,0 +1,21 @@
+[Initial]
+Message=Aktiviere den openSSH-Server
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "openSSH"
+powershellCall('Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0')
+powershellCall('Start-Service sshd')
+powershellCall("Set-Service -Name sshd -StartupType 'Automatic'")
+powershellCall('Get-NetFirewallRule -Name *ssh*')
+powershellCall("New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22")
+Sub_HandleExitCode
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

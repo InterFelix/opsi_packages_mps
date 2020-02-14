@@ -1,0 +1,10 @@
+[Product]
+type: localboot
+id: ryzen-driver
+name: Ryzen Treiber
+description: Installiere Ryzen Treiber
+advice:
+version: 1.0
+packageVersion: 1.2
+setupScript: install.ins
+uninstallScript: remove.ins

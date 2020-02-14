@@ -1,0 +1,21 @@
+[Initial]
+Message=Deinstalliere Explorer-Fix
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "Explorer-Fix"
+Files_Setup
+Sub_HandleExitCode
+ExitWindows /Reboot
+
+[WinBatch_Setup]
+"%ScriptPath%\data\radeon.exe" -UNINSTALL ALL
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

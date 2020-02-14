@@ -1,0 +1,18 @@
+[Initial]
+Message=Deaktiviere den openSSH-Server
+DefVar $ExitCode$
+
+[Aktionen]
+ShowBitmap "%ScriptPath%\logo.png" "openSSH"
+powershellCall('Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0')
+Sub_HandleExitCode
+
+
+[Sub_HandleExitCode]
+; check return code
+Set $ExitCode$ = GetLastExitCode
+comment "GetLastExitCode: " + $ExitCode$
+if not($ExitCode$ = "0")
+  LogError "Fatal: setup returned exit code " + $ExitCode$
+  IsFatalError
+endif

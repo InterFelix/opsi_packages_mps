@@ -1,0 +1,10 @@
+[Product]
+type: localboot
+id: openssh-server
+name: Microsoft openSSH-Server
+description: Aktiviert den Windows-eigenen openSSH-Server.
+advice:
+version: 0.0.1.0
+packageVersion: 1.4
+setupScript: install.ins
+uninstallScript: remove.ins
